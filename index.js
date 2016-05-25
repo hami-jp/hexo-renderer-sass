@@ -1,4 +1,5 @@
 var sass   = require('node-sass');
+var normalize = require('node-normalize-scss').includePaths;
 var husl   = require('node-sass-husl');
 var extend = require('util')._extend;
 
@@ -15,6 +16,7 @@ var sassRenderer = function(data, options) {
     file: data.path,
     outputStyle: 'nested',
     sourceComments: false,
+    includePaths: [normalize],
     functions: {
       'husl($arg)': husl,
       'huslp($arg)': husl.p

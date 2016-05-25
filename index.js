@@ -1,4 +1,5 @@
 var sass   = require('node-sass');
+var husl   = require('node-sass-husl');
 var extend = require('util')._extend;
 
 var sassRenderer = function(data, options) {
@@ -14,6 +15,10 @@ var sassRenderer = function(data, options) {
     file: data.path,
     outputStyle: 'nested',
     sourceComments: false,
+    functions: {
+      'husl($arg)': husl,
+      'huslp($arg)': husl.p
+    }
   }, userConfig);
 
   try {
@@ -28,7 +33,7 @@ var sassRenderer = function(data, options) {
     console.error(error.toString());
     throw error;
   }
-}
+};
 
 // associate the Sass renderer with .scss AND .sass extensions
 hexo.extend.renderer.register('scss', 'css', sassRenderer);
